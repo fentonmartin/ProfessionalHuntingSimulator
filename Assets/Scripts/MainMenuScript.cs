@@ -55,6 +55,10 @@ public class MainMenuScript : MonoBehaviour {
 			HighScoreMenu ();
 		if (state == "ResultMenu")
 			ResultsMenu ();
+		if (state == "HowToMenu")
+			HowToMenu ();
+		if (state == "CreditMenu")
+			CreditMenu ();
 
     }
 
@@ -68,17 +72,25 @@ public class MainMenuScript : MonoBehaviour {
 			SceneManager.UnloadSceneAsync("MainMenuScene");
 			SceneManager.LoadScene ("HuntingGameScene");
 		}
-		if (GUI.Button (new Rect ((Screen.width / 2) + 100, (Screen.height / 2) - 10, 150, 40), "Show highscores")) 
+		if (GUI.Button (new Rect ((Screen.width / 2) + 100, (Screen.height / 2) - 10, 150, 40), "Highscores")) 
 		{
 			state = "HighScoreMenu";
+		}
+		if (GUI.Button (new Rect ((Screen.width / 2) + 100, (Screen.height / 2) - 70, 150, 40), "How To Play")) 
+		{
+			state = "HowToMenu";
+		}
+		if (GUI.Button (new Rect ((Screen.width / 2) + 100, (Screen.height / 2) + 50, 150, 40), "Credit")) 
+		{
+			state = "CreditMenu";
 		}
 	}
 
 	void HighScoreMenu(){
-        if(CanGet())
-            StartCoroutine(GetFromServer());
+		if(CanGet())
+			StartCoroutine(GetFromServer());
 
-        if (GUI.Button (new Rect ((Screen.width / 2) + 100, (Screen.height / 2) - 10, 150, 40), "Back")) 
+		if (GUI.Button (new Rect ((Screen.width / 2) + 100, (Screen.height / 2) - 10, 150, 40), "Back")) 
 		{
 			state = "FirstMenu";
 		}
@@ -91,6 +103,35 @@ public class MainMenuScript : MonoBehaviour {
 			}
 		}
 		GUI.TextArea (new Rect ((Screen.width / 2) - 400, (Screen.height / 2) - 200, 450, 400), scoresText);
+	}
+
+	void CreditMenu(){
+
+		if (GUI.Button (new Rect ((Screen.width / 2) + 100, (Screen.height / 2) - 10, 150, 40), "Back")) 
+		{
+			state = "FirstMenu";
+		}
+		string creditText = "\nDicoding Academy\n\nMenjadi Game Developer Expert\n\n\nDicoding\n2018";
+
+		GUI.TextArea (new Rect ((Screen.width / 2) - 250, (Screen.height / 2) - 150, 250, 200), creditText);
+	}
+
+	void HowToMenu(){
+
+		if (GUI.Button (new Rect ((Screen.width / 2) + 100, (Screen.height / 2) - 10, 150, 40), "Back")) 
+		{
+			state = "FirstMenu";
+		}
+		string creditText = "\nHow To Play:\n\n" +
+			"W - Untuk bergerak ke depan\n" +
+			"S - Untuk bergerak ke belakang\n" +
+			"A - Untuk bergerak ke kiri\n" +
+			"D - Untuk bergerak ke kanan\n" +
+			"Spasi - Untuk melompat\n" +
+			"Mouse kiri - Untuk menembak\n" +
+			"\n\n\nDicoding Academy\nMenjadi Game Developer Expert\n\nDicoding 2018";
+
+		GUI.TextArea (new Rect ((Screen.width / 2) - 250, (Screen.height / 2) - 150, 250, 250), creditText);
 	}
 
 	void ResultsMenu(){
